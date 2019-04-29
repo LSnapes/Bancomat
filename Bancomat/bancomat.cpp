@@ -5,15 +5,9 @@
 
 using namespace std;
 
-int const numero = 5;
-float saldo = 100 ;
 bool avanti = false;
-
-int password_master = 2580;
-int i;
+int const numero = 5;
 int lavcont;
-int cont_conti;
-
 
 struct data{
 	
@@ -21,7 +15,7 @@ struct data{
 	string mese;
 	int anno;
 
-}datansc,ap_conto;
+};
 
 struct anagrafica{
 	
@@ -37,7 +31,7 @@ struct anagrafica{
 	}ppersona[numero];
 
 void inserire_conti(){
-	
+	int i;
 	bool  continua_a_inserire;
 	int continuaainserire;
 	while(continua_a_inserire == false){
@@ -66,7 +60,7 @@ void inserire_conti(){
 		cin>>ppersona[i].datanascita.mese;
 		cout<<"Anno nascita"<<endl;
 		cin>>ppersona[i].datanascita.anno;
-		cout<<"Inserire un altro conto?\n1-->SI\n2-->NO"<<endl;
+		cout<<"Inserire un altro conto?\n1-->SI\nAltro numero-->NO"<<endl;
 		cin>>continuaainserire;
 	
 		if(continuaainserire == 1){
@@ -88,7 +82,7 @@ void inserire_conti(){
 void ripetere(){
 	int obb;
 	cout<<"Si vuole eseguire altre azioni ?"<<endl;
-	cout<<"1--> Si"<<"\t"<<"2--> No";
+	cout<<"1--> Si"<<"\n"<<"Altro numero--> No";
 	cin>>obb;
 	if(obb == 1){
 		avanti = false;
@@ -99,6 +93,7 @@ void ripetere(){
 	}
 
 void convalida_pin(){
+	int i;
 	int pin=0;
 	int pin_c= 0;
 	int tentativi  = 3;
@@ -165,7 +160,7 @@ void convalida_pin(){
 }
 
 void prelievo(){
-
+	int i;
 	convalida_pin();
 	float prelievo;
 	
@@ -195,7 +190,7 @@ void prelievo(){
 	
 void versamento(){
 	convalida_pin();
-	
+	int i;
 	float versamento;
 	
 	for(i = lavcont; i < numero;i++){
@@ -211,6 +206,7 @@ void versamento(){
 }
 
 void mostra_conto(){
+	int i;
 	for(i=lavcont;i<numero;i++){
 	cout<<ppersona[i].nome<<"---"<<ppersona[i].cognome<<endl;
 	cout<<"Saldo disponibile"<<endl;
@@ -225,12 +221,13 @@ void mostra_conto(){
 	}
 
 void inserireconti(){
+	int i;
 	int convpassword_master;
 	bool lavorareconto;
 	int convalidaconto;
 	int passwordcont;
-	
-	
+	int cont_conti;
+	int password_master = 2580;
 	cout<<"Password_master"<<endl;
 	cin>>convpassword_master;
 
@@ -238,7 +235,12 @@ void inserireconti(){
 		inserire_conti();
 		cont_conti++;
 	}
-
+	else{
+		cout<<"Password master non corretta"<<endl;
+		system("pause");
+		exit(EXIT_SUCCESS);
+		;
+	}
 	
 	while(lavorareconto == false){
 		cout<<"con quale conto si vuole agire?";
@@ -265,6 +267,7 @@ void inserireconti(){
 }
 
 void scegli_conto(){
+		int i;
 		int convpassword_master;
 		bool lavorareconto=false;
 		int convalidaconto;
@@ -280,7 +283,8 @@ void scegli_conto(){
 					lavcont = i;
 				}
 			else{
-					cout<<"conto non esistente riprovare"<<endl;
+					cout<<"Conto non esistente"<<endl;
+						exit(EXIT_SUCCESS);
 		}	
 	}	
 	}
@@ -288,17 +292,24 @@ void scegli_conto(){
 }
 
 void menu(){
+	int i;
 	int scelta = 5;
 	
 	for(i=0;i<numero;i++){
 		while (avanti == false){
 		system("cls");
+		cout<<"Buongiorno"<<endl;
 		cout<<"Cosa si intende eseguire"<<endl;
 	
-	cout<<"1-->Prelievo\n2-->Versamento\n3-->Mostra Conto\n4-->Inserire conti\n5-->Scegliereconti\n0-->Esci dal programma"<<endl;
-	cin>>scelta;
+		cout<<"Prelievo\t\t1"<<endl;
+		cout<<"Versamento\t\t2"<<endl;
+		cout<<"Mostra conto\t\t3"<<endl;
+		cout<<"Inserire conti\t\t4"<<endl;
+		cout<<"Scegliere conti\t\t5"<<endl;
+		cout<<"Esci dal programma\t0"<<endl;
+		cin>>scelta;
 	
-	switch  (scelta)
+		switch  (scelta)
 		{
 			case 0 :{
 				exit(EXIT_SUCCESS);
@@ -331,3 +342,4 @@ void menu(){
 main(){	
 	menu();
 }
+
