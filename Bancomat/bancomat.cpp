@@ -82,7 +82,7 @@ void inserire_conti(){
 void ripetere(){
 	int obb;
 	cout<<"Si vuole eseguire altre azioni ?"<<endl;
-	cout<<"1--> Si"<<"\n"<<"Altro numero--> No";
+	cout<<"1\tSi"<<"\n"<<"Altro numero\tNo";
 	cin>>obb;
 	if(obb == 1){
 		avanti = false;
@@ -144,10 +144,10 @@ void convalida_pin(){
 		}
 		if(tentativi <= 0 ){
 			cout<<"Vuoi continuare ? "<<endl;
-			cout<<"Si = 1-----------No = 0"<<endl;
+			cout<<"Si\t1\t\tNo\t0"<<endl;
 			cin>>scelta;
 			if(scelta == 0){
-				abort();
+					exit(EXIT_SUCCESS);
 			}
 		}	
 		}	
@@ -159,13 +159,23 @@ void convalida_pin(){
 	
 }
 
+void commissione(){
+	int commissione=3;
+	int i;
+	cout<<"Per eseguire l'operazione e' stata sottratta al suo conto una commissione\n";
+	for(i=lavcont;i<numero;i++){
+		ppersona[i].saldo=ppersona[i].saldo-commissione;
+	}
+	
+}
+
 void prelievo(){
 	int i;
 	convalida_pin();
 	float prelievo;
 	
 	bool prelievo_valido = false;
-	
+	commissione();
 	for(i=lavcont;i<numero;i++){
 		while(prelievo_valido == false){
 		cout<<"Quanto si desidera prelevare"<<endl;
@@ -192,7 +202,7 @@ void versamento(){
 	convalida_pin();
 	int i;
 	float versamento;
-	
+	commissione();
 	for(i = lavcont; i < numero;i++){
 		cout<<"Quanto si vuole versare"<<endl;
 		cin>>versamento;
@@ -343,3 +353,5 @@ main(){
 	menu();
 }
 
+
+//fare la storia degli interessi
