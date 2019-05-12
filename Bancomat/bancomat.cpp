@@ -12,7 +12,7 @@ int lavcont;
 struct data{
 	
 	int giorno;
-	string mese;
+	int mese;
 	int anno;
 
 };
@@ -301,6 +301,41 @@ void scegli_conto(){
 	
 }
 
+void calcolo_giorni(){
+	int data_giorno;
+	int data_mese;
+	int data_anno;
+	int datag;
+	int datam;
+	int dataa;																											
+	cout<<"Giorno di oggi"<<endl;
+	cin>>data_giorno;
+	cout<<"Mese di oggi"<<endl;
+	cin>>data_mese;
+	cout<<"Anno di oggi"<<endl;
+	cin>>data_anno;
+	for(int i = lavcont;i < numero;i++){
+		datag = data_giorno - ppersona[i].ap_conto.giorno;
+		datam = data_mese - ppersona[i].ap_conto.mese;
+		dataa = data_anno - ppersona[i].ap_conto.anno;
+		break;
+	}
+	
+	cout<<"Giorni passati dall' apertura del conto"<< datag<<"giorni"<<datam<<"mesi"<<dataa<<"anni"<<endl;
+	
+	cout<<"Ogni anno viene versato un interesse del 2%"<<endl;
+	
+	for(int i = lavcont;i < numero;i++){
+			int saldo = ppersona[i].saldo;
+			saldo = saldo + ((saldo* 2)/100);
+			ppersona[i].saldo = saldo;
+			cout<<"saldo attuale"<<ppersona[i].saldo<<endl;
+			break;
+		}
+	
+	ripetere();
+}
+
 void menu(){
 	int i;
 	int scelta = 5;
@@ -316,6 +351,7 @@ void menu(){
 		cout<<"Mostra conto\t\t3"<<endl;
 		cout<<"Inserire conti\t\t4"<<endl;
 		cout<<"Scegliere conti\t\t5"<<endl;
+		cout<<"Calcolo giorni di apertura del conto\t\t6"<<endl;
 		cout<<"Esci dal programma\t0"<<endl;
 		cin>>scelta;
 	
@@ -343,6 +379,10 @@ void menu(){
 			case 5:{
 				scegli_conto();
 				break;
+			}
+			case 6:{
+				calcolo_giorni();
+				break;
 			}	
 		}	
 		}
@@ -353,5 +393,6 @@ main(){
 	menu();
 }
 
+ 
+//interessi da mettere prima ma poi a posto vedere files
 
-//fare la storia degli interessi
